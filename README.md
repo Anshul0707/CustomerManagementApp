@@ -1,1 +1,1 @@
-# CustomerManagementApp
+# com.customer.management.CustomerManagementApp
