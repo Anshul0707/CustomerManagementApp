@@ -1,9 +1,5 @@
 package com.customer.management.service;
-
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,16 +7,14 @@ import org.springframework.web.client.RestTemplate;
 public class AuthService {
 
     private final String AUTH_API_URL = "https://qa2.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp";
-    private final String LOGIN_ID = "test@sunbasedata.com";
-    private final String PASSWORD = "Test@123";
 
-    public String authenticateAndGetToken() {
+    public String authenticateAndGetToken(String loginId, String password) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        String requestBody = "{\"login_id\":\"" + LOGIN_ID + "\",\"password\":\"" + PASSWORD + "\"}";
+        String requestBody = "{\"login_id\":\"" + loginId + "\",\"password\":\"" + password + "\"}";
         HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(AUTH_API_URL, entity, String.class);
@@ -35,5 +29,3 @@ public class AuthService {
         }
     }
 }
-
-
